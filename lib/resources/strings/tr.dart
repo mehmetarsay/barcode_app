@@ -11,6 +11,7 @@ enum Tr {
   selectedProducts,
   productDeleted,
   productAdded,
+  productDeleteInfo,
   ;
 
   const Tr();

@@ -36,16 +36,31 @@ Widget productsView(BuildContext context, void data) => ViewModelBuilder<Product
                 SliverToBoxAdapter(child: _Title(Tr.selectedProducts())),
                 model.selectProducts.isNotEmpty
                     ? SliverToBoxAdapter(
-                        child: Container(
-                          height: 130,
-                          color: DColors.secondary,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: model.selectProducts.length,
-                            itemBuilder: (context, i) => BuildSelectProductPanel(
-                                product: model.selectProducts[i],
-                                onDeleted: () => model.deleteProduct(model.selectProducts[i])),
-                          ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 110,
+                              child: Card(
+                                color: DColors.secondary,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: model.selectProducts.length,
+                                  itemBuilder: (context, i) => BuildSelectProductPanel(
+                                      product: model.selectProducts[i],
+                                      onDeleted: () => model.deleteProduct(model.selectProducts[i])),
+                                ),
+                              ),
+                            ),
+                             Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Icon(Icons.info_outline, color: Colors.grey,size: 15,),
+                                const SizedBox(width: DDimens.xs),
+                                Text(Tr.productDeleteInfo(), style: DTextStyles.greySmallLight),
+                                const SizedBox(width: DDimens.xs),
+                              ],
+                            ),
+                          ],
                         ),
                       )
                     : SliverToBoxAdapter(

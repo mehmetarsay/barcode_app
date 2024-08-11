@@ -1,3 +1,4 @@
+import 'package:barcode_app/network/api.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 
 class BarcodeScannerWrapper {
@@ -28,13 +29,13 @@ class BarcodeScannerWrapper {
 
   static Future<String?> customScanFunction() async {
     try {
-      if ((await _numberOfCameras) == 0) throw Exception('No camera found');
+      if ((await _numberOfCameras) == 0) throw ErrorException('No camera found');
       final result = await _scan();
       if (result.type == ResultType.Cancelled) return null;
-      if (result.type == ResultType.Error) throw Exception(result.rawContent);
+      if (result.type == ResultType.Error) throw ErrorException(result.rawContent);
       return result.rawContent;
     } catch (e) {
-      throw 'Error in cust"om scan function: $e';
+      rethrow;
     }
   }
 }

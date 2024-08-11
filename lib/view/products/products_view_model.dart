@@ -39,11 +39,11 @@ class ProductsViewModel extends PaginationScrollController {
 
   deleteProduct(Product product) => _productService.selectProductRemove(product);
 
-  barcodeScan() async {
-    var barcode = await BarcodeScannerWrapper.customScanFunction();
+  barcodeScan() async => request(()async{
+      var barcode = await BarcodeScannerWrapper.customScanFunction();
     if (barcode == null) return;
     addProduct(barcode: barcode);
-  }
+});
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_productService];

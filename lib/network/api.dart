@@ -34,9 +34,10 @@ class Api {
       } else {
         return navigator.dialog(title: 'Hata', description: e.message);
       }
-    } else {
-      return navigator.dialog(title: 'Hata', description: e);
+    } else if (e is ErrorException) {
+      return navigator.dialog(title: 'Hata', description: e.message);
     }
+    return navigator.dialog(title: 'Hata', description: e.toString());
   }
 }
 
@@ -56,5 +57,16 @@ class ApiError implements Exception {
     if (inner != null) s += '\n$inner';
     if (stackTrace != null) s += '\n$stackTrace';
     return s;
+  }
+}
+
+class ErrorException implements Exception {
+  final String message;
+
+  ErrorException(this.message);
+
+  @override
+  String toString() {
+    return 'ErrorException: $message';
   }
 }

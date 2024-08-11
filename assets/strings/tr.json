@@ -7,5 +7,6 @@
     "products": "Products",
     "selectedProducts": "Selected Products",
     "productDeleted": "has been deleted",
-    "productAdded": "has been added"
+    "productAdded": "has been added",
+    "productDeleteInfo": "Swipe up for delete"
 }
