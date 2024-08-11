@@ -1,0 +1,11 @@
+{
+    "popupButtonText": "Okay",
+    "productsTitle": "Products",
+    "selectedProductsEmptyText": "No product selected",
+    "price": "Price:",
+    "stock": "Stock:",
+    "products": "Products",
+    "selectedProducts": "Selected Products",
+    "productDeleted": "has been deleted",
+    "productAdded": "has been added"
+}
