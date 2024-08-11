@@ -4,6 +4,9 @@
 
 Mobile client using flutter and mvvm, clean architecture
 
+Flutter version 3.24.0
+Dart version 3.5.0
+
 
 ## Adding String Resource
 1. Add all translations with the same key into `assets/strings/[language-code].json` files
