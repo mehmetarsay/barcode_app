@@ -10,7 +10,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:stacked/stacked.dart';
-
 part 'products_view.g.dart';
 
 @swidget
@@ -38,12 +37,12 @@ Widget productsView(BuildContext context, void data) => ViewModelBuilder<Product
                 model.selectProducts.isNotEmpty
                     ? SliverToBoxAdapter(
                         child: Container(
-                          height: 130.0,
+                          height: 130,
                           color: DColors.secondary,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: model.selectProducts.length,
-                            itemBuilder: (context, i) => _buildSelectProductPanel(
+                            itemBuilder: (context, i) => BuildSelectProductPanel(
                                 product: model.selectProducts[i],
                                 onDeleted: () => model.deleteProduct(model.selectProducts[i])),
                           ),
@@ -57,25 +56,24 @@ Widget productsView(BuildContext context, void data) => ViewModelBuilder<Product
                 const SliverToBoxAdapter(child: SizedBox(height: DDimens.m)),
                 SliverToBoxAdapter(child: _Title(Tr.products())),
                 SliverList(
-                  delegate: SliverChildBuilderDelegate((_, i) {
-                    return ValueListenableBuilder<int?>(
+                  delegate: SliverChildBuilderDelegate(
+                    (_, i) => ValueListenableBuilder<int?>(
                         valueListenable: model.expandedIndex,
-                        builder: (_, value, ___) {
-                          return BuildProductPanel(
-                            product: model.allProducts[i],
-                            index: i,
-                            isExpanded: value == i,
-                            expansionCallback: (index) => model.expandedIndex.value = index,
-                            addProduct: () => model.addProduct(product: model.allProducts[i]),
-                          );
-                        });
-                  }, childCount: model.allProducts.length),
+                        builder: (_, value, ___) => BuildProductPanel(
+                              product: model.allProducts[i],
+                              index: i,
+                              isExpanded: value == i,
+                              expansionCallback: (index) => model.expandedIndex.value = index,
+                              addProduct: () => model.addProduct(product: model.allProducts[i]),
+                            )),
+                    childCount: model.allProducts.length,
+                  ),
                 ),
                 SliverToBoxAdapter(
                   child: ValueListener(
-                      listenable: model.isLoading,
-                      builder: (bool value) =>
-                          value ? const SizedBox(height: 50, child: CenterLoading()) : const SizedBox()),
+                    listenable: model.isLoading,
+                    builder: (bool value) => value ? const CenterLoading() : const SizedBox(),
+                  ),
                 )
               ],
             ),
@@ -87,13 +85,7 @@ Widget productsView(BuildContext context, void data) => ViewModelBuilder<Product
 @swidget
 Widget __title(String title) => Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            title,
-            style: DTextStyles.darkBold,
-          ),
-        ),
+        Align(alignment: Alignment.centerLeft, child: Text(title, style: DTextStyles.darkBold)),
         const Divider()
       ],
     );
@@ -118,9 +110,8 @@ Widget _buildSelectProductPanel({required Product product, required Function() o
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0), // DDimens.xss yerine sabit bir değer kullandım
-              child: Text('\$${product.price}',
-                  style: const TextStyle(color: Colors.grey)), // DTextStyles yerine TextStyle kullandım
+              padding: const EdgeInsets.all(DDimens.s),
+              child: Text('\$${product.price}', style: const TextStyle(color: Colors.grey)),
             ),
           ],
         ),
@@ -180,10 +171,7 @@ Widget _buildProductPanel({
                         children: [
                           Icon(Icons.local_shipping, color: Colors.grey[600]),
                           const SizedBox(width: DDimens.xs),
-                          Text(
-                            product.shippingInformation,
-                            style: const TextStyle(color: Colors.grey),
-                          ),
+                          Text(product.shippingInformation, style: const TextStyle(color: Colors.grey)),
                         ],
                       ),
                       if (addProduct != null)

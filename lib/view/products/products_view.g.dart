@@ -33,6 +33,24 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext _context) => __title(title);
 }
 
+class BuildSelectProductPanel extends StatelessWidget {
+  const BuildSelectProductPanel({
+    Key? key,
+    required this.product,
+    required this.onDeleted,
+  }) : super(key: key);
+
+  final Product product;
+
+  final dynamic Function() onDeleted;
+
+  @override
+  Widget build(BuildContext _context) => _buildSelectProductPanel(
+        product: product,
+        onDeleted: onDeleted,
+      );
+}
+
 class BuildProductPanel extends StatelessWidget {
   const BuildProductPanel({
     Key? key,
