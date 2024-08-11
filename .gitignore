@@ -98,3 +98,5 @@
 .dart_tool/build_resolvers/sdk.sum.deps
 .dart_tool/pub/bin/build_runner/build_runner.dart-3.5.0.snapshot
 .flutter-plugins-dependencies
+.dart_tool/package_config.json
+.flutter-plugins-dependencies
